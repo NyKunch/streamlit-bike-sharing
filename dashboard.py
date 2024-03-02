@@ -8,6 +8,9 @@ sns.set(style='dark')
 data = pd.read_csv('datafinal.csv')
 data['dteday'] = pd.to_datetime(data['dteday'])
 
+data_day = pd.read_csv('datafinal_day.csv')
+data_day['dteday'] = pd.to_datetime(data_day['dteday'])
+
 min_date = data['dteday'].min()
 max_date = data['dteday'].max()
 
@@ -82,4 +85,16 @@ ax.set_ylabel('')
 
 st.pyplot(fig)
 
+# Membuat visualisasi keempat
+st.subheader('Customer Count Comparison by Temperature and Season')
 
+fig, ax = plt.subplots(figsize=(10, 6))
+
+sns.scatterplot(x='temp', y='cnt', data=data_day, hue='season', palette='Set2')
+
+plt.legend(title='Season', title_fontsize='12')
+
+ax.set_xlabel('Temperature in Celcius')
+ax.set_ylabel('')
+
+st.pyplot(fig)
